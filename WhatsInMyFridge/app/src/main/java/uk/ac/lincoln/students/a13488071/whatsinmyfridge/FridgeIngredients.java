@@ -36,7 +36,7 @@ public class FridgeIngredients extends AppCompatActivity {
     public class AsyncTaskParseJson extends AsyncTask<String, String, String> {
 
         @Override
-        protected void onPreExecute()
+        protected void onPreExecute()//done before the background
         {
             items.clear(); //makes sure that the array list is empty before searching
         }
