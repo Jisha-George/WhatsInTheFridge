@@ -8,6 +8,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import android.util.Log;
 
+//Adapted from the Workshop code from Week 5... Supplied by Derek Foster
+
 public class HttpConnect {
 
     // the below line is for making debugging easier
