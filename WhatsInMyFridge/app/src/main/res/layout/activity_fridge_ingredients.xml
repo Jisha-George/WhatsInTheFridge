@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FridgeIngredients"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    tools:context=".FridgeIngredients">
 
 
     <EditText
@@ -16,7 +16,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Search Ingredient (use comma to separate)"
+        android:hint="Search Ingredient"
         android:inputType="textPersonName"
         android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,18 +26,18 @@
 
     <Button
         android:id="@+id/searchRecipe"
-        android:layout_width="85dp"
-        android:layout_height="38dp"
+        android:layout_width="74dp"
+        android:layout_height="35dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
+        android:background="@android:color/holo_blue_dark"
         android:onClick="searchRecipe"
         android:text="Search"
-        android:background="@android:color/holo_blue_dark"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ingredientText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.015" />
@@ -61,25 +61,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredientText"
+        app:layout_constraintTop_toBottomOf="@+id/Instructions"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="85dp"
-        android:layout_height="38dp"
+        android:layout_width="69dp"
+        android:layout_height="35dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
+        android:background="@android:color/holo_blue_dark"
         android:onClick="saveRecipe"
         android:text="Save"
-        android:background="@android:color/holo_blue_dark"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/searchRecipe"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.015" />
+
+    <TextView
+        android:id="@+id/Instructions"
+        android:layout_width="285dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Use comma to separate mutiple Ingredients. For Example: Onion,Tomato, Eggs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchRecipe"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

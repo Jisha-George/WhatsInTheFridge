@@ -38,7 +38,7 @@ public class SavedRecipes extends AppCompatActivity {
         if (recipeList.length() == 0)
         {
             AlertDialog.Builder a = new AlertDialog.Builder(SavedRecipes.this);
-            a.setMessage("No Recipes Found!").setCancelable(true);
+            a.setMessage("No Recipes Saved!").setCancelable(true);
             AlertDialog ab = a.create();
             ab.show();
             lists.setAdapter(saveRecipe);
