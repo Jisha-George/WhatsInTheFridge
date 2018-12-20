@@ -2,6 +2,8 @@ package uk.ac.lincoln.students.a13488071.whatsinmyfridge;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import org.json.JSONArray;
@@ -20,6 +22,7 @@ import android.content.SharedPreferences;
 public class FridgeIngredients extends AppCompatActivity {
 
     ArrayList<String> items = new ArrayList<>();
+    ArrayList<String> recipe = new ArrayList<>();
     String apiUrl = "http://www.recipepuppy.com/api/?i=";
 
     @Override
@@ -54,6 +57,7 @@ public class FridgeIngredients extends AppCompatActivity {
                         items.add(json_message.getString("title"));
                     }
                 }
+
                 if (arr.length() == 0)
                 {
                     items.isEmpty();
@@ -83,6 +87,73 @@ public class FridgeIngredients extends AppCompatActivity {
             else {
                 list.setAdapter(recipeArrayAdapter);
                 list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+            }
+        }
+    }
+
+    public class AsyncTaskParseJsonRecipe extends AsyncTask<String, String, String> {
+
+        @Override
+        protected void onPreExecute()
+        {
+            recipe.clear();
+        }
+
+        @Override
+        protected String doInBackground(String... arg0) {
+            EditText ingredient = findViewById(R.id.ingredientText);
+            try
+            {
+                HttpConnect jParser = new HttpConnect();
+                String newUrl = apiUrl + ingredient.getText().toString();
+                String json = jParser.getJSONFromUrl(newUrl);
+                JSONObject jsonArray = new JSONObject(json);
+                JSONArray arr = jsonArray.getJSONArray("results");
+
+                ListView lstView = findViewById(R.id.showRecipe);
+
+                for (int i =0; i< lstView.getCount(); i++)
+                {
+                    if (lstView.isItemChecked(i))
+                    {
+                        JSONObject json_message = arr.getJSONObject(i);
+
+                        if (json_message != null) {
+                            recipe.add(json_message.getString("href"));
+                        }
+                    }
+                }
+
+                if (arr.length() == 0)
+                {
+                    recipe.isEmpty();
+                }
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String doInBackground)
+        {
+            if (recipe.isEmpty())
+            {
+                AlertDialog.Builder a = new AlertDialog.Builder(FridgeIngredients.this);
+                a.setMessage("No Recipes Found!").setCancelable(true);
+                AlertDialog ab = a.create();
+                ab.show();
+            }
+            else {
+                recipe.subList(1,recipe.size()).clear();
+                String output = new String(recipe.toString());
+                output = output.replace("[","");
+                output = output.replace("]","");
+                Uri webpage = Uri.parse(output);
+                Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                startActivity(intent);
             }
         }
     }
@@ -124,5 +195,9 @@ public class FridgeIngredients extends AppCompatActivity {
         {
             Toast.makeText(FridgeIngredients.this, "Saved Failed!", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void showRecipe(View view){
+        new AsyncTaskParseJsonRecipe().execute();
     }
 }
