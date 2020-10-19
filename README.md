@@ -1,6 +1,6 @@
 # WhatsInTheFridge
 
-A mobile app developed in Android Studio.
+A mobile app developed in Android Studio as an assignment for the Mobile Computing module in University of Lincoln
 
 WhatInTheFridge, gives users recipies based on the ingredients in their fridge (inputted into the app by the user)
 
